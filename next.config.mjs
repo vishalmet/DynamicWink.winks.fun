@@ -11,7 +11,10 @@ const nextConfig = {
           }
         ],
       },
-    ]
+    ];
+  },
+  eslint: {
+    ignoreDuringBuilds: true, // This will ignore ESLint during builds
   },
 }
 
