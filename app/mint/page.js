@@ -14,7 +14,6 @@ export default function MintPage() {
       return;
     }
 
-    // Using winks-win.vercel.app for mint page
     const targetUrl = `https://winks-win.vercel.app/?useradd=${encodeURIComponent(walletAddress)}`;
     const baseUrl = window.location.hostname === 'localhost' ? 'localhost:3000' : 'dynamicwink.vercel.app';
     const protocol = window.location.hostname === 'localhost' ? 'http://' : 'https://';

@@ -3,6 +3,19 @@
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState, Suspense } from 'react';
 
+// Add this at the top level of your file
+const fullScreenStyles = {
+  position: 'fixed',
+  top: 0,
+  left: 0,
+  width: '100vw',
+  height: '100vh',
+  margin: 0,
+  padding: 0,
+  border: 'none',
+  backgroundColor: '#000', // Dark background to match most dApps
+};
+
 function DappContent() {
   const searchParams = useSearchParams();
   const [iframeUrl, setIframeUrl] = useState('');
@@ -19,35 +32,23 @@ function DappContent() {
     }
   }, [searchParams]);
 
+  if (!iframeUrl) {
+    return null;
+  }
+
   return (
-    <div style={{ width: '100%', height: '100vh', overflow: 'hidden' }}>
-      {iframeUrl ? (
-        <iframe
-          src={iframeUrl}
-          style={{
-            width: '100%',
-            height: '100%',
-            border: 'none',
-          }}
-          allowFullScreen
-          allow="web3"
-        />
-      ) : (
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-          <p>Loading...</p>
-        </div>
-      )}
-    </div>
+    <iframe
+      src={iframeUrl}
+      style={fullScreenStyles}
+      allowFullScreen
+      allow="web3"
+    />
   );
 }
 
 export default function DappPage() {
   return (
-    <Suspense fallback={
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-        <p>Loading dApp...</p>
-      </div>
-    }>
+    <Suspense fallback={null}>
       <DappContent />
     </Suspense>
   );

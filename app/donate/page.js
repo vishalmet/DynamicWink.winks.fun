@@ -15,8 +15,9 @@ export default function DonatePage() {
     }
 
     const targetUrl = `https://donate-winks.vercel.app/?useradd=${encodeURIComponent(walletAddress)}`;
-    const baseUrl = 'dynamicwink.vercel.app';
-    const fullUrl = `https://${baseUrl}/dapp?url=${encodeURIComponent(targetUrl)}&t=${Date.now()}`;
+    const baseUrl = window.location.hostname === 'localhost' ? 'localhost:3000' : 'dynamicwink.vercel.app';
+    const protocol = window.location.hostname === 'localhost' ? 'http://' : 'https://';
+    const fullUrl = `${protocol}${baseUrl}/dapp?url=${encodeURIComponent(targetUrl)}&t=${Date.now()}`;
     
     setGeneratedLink(fullUrl);
 
