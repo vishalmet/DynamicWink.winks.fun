@@ -1,7 +1,18 @@
-// next.config.mjs
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  async headers() {
+    return [
+      {
+        source: "/dapp",
+        headers: [
+          {
+            key: "Content-Security-Policy",
+            value: "frame-ancestors 'self' donate-winks.vercel.app winks-win.vercel.app;"
+          }
+        ],
+      },
+    ]
+  },
 }
 
 export default nextConfig;
